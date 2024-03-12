@@ -2,12 +2,14 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { UserService } from './user/user.service';
 import { CounterMiddleware } from './counter.middleware';
+import { PostService } from './post/post.service';
 
 @Controller()
 export class AppController {
   constructor(
     private appService: AppService,
     private userService: UserService,
+    private postService: PostService,
   ) {}
 
   @Get()
@@ -38,6 +40,11 @@ export class AppController {
   @Get('user/years') 
   getYears() : ReturnType<UserService['getYears']> {
     return this.userService.getYears();
+  }
+
+  @Get('post')
+  getPost() : ReturnType<PostService['getPost']> {
+    return this.postService.getPost();
   }
 
   @Get('counter')
